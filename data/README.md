@@ -24,12 +24,36 @@ the firs step is to moves alt .txt files in one folder and filter the files with
 import os
 import pandas as pd
 
-folder = input("folder path")
+# Input folder path
+folder = input("Enter the folder path: ")
 
+# List all files in the folder
 files = os.listdir(folder)
-datasets = [f for f in files if os.path.isfile(folder+'/'+f)]
+datasets = [f for f in files if os.path.isfile(os.path.join(folder, f))]
 
+# Define the function
+def finder(files):
+    for file_name in files:
+        try:
+            # Construct the file path
+            file_path = os.path.join(folder, file_name)
+            
+            # Read the table
+            txt_f = pd.read_table(file_path)
+            
+            # Check if the DataFrame has a 'class' column and evaluate its unique class count
+            if 'class' in txt_f.columns:
+                unique_classes = len(txt_f['class'].unique())
+                if unique_classes == 8:
+                    print(f"{file_name} has 8 unique classes.")
+                else:
+                    print(f"{file_name} has {unique_classes} unique classes.")
+            else:
+                print(f"Column 'class' not found in {file_name}.")
+        except Exception as e:
+            print(f"Error processing file {file_name}: {e}")
 
-for f in files:
-  
+# Call the function
+finder(datasets)
+
 ```

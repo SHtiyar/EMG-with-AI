@@ -1,0 +1,7 @@
+# Python version constraint (not directly enforceable via pip but added as a comment for clarity)
+# Python >= 3.8
+
+torch>=1.9.0      # PyTorch
+pandas>=1.3.0     # Pandas
+numpy>=1.21.0     # NumPy
+matplotlib>=3.4.0 # Matplotlib

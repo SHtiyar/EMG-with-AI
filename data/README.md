@@ -1,3 +1,5 @@
+# NOTE : all of my filtered files already uploaded in my drive, because my device is potato laptop
+
 the files that i uses already filtered and use 50 files from 72 files.
 
 if you download the original files, the original folder structure will be like

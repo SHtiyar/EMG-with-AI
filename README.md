@@ -21,7 +21,7 @@ This project implements a Convolutional Neural Network (CNN) and Artificial Neur
 
 ### Prerequisites
 - Python 3.8+
-- PyTorch
+- PyTorch <a href="https://pytorch.org/get-started/locally/">How to install PyTorch Locally</a>
 - Pandas
 - NumPy
 - Matplotlib
@@ -31,3 +31,9 @@ This project implements a Convolutional Neural Network (CNN) and Artificial Neur
 2. Install dependencies:
 ```bash
 pip install -r requirements.txt
+```
+
+## Contribution Guidelines
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request

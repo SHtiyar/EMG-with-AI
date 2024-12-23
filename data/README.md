@@ -91,8 +91,3 @@ with open(pickle_path, 'rb') as f:
 - Handles file reading errors
 - Reports invalid class counts
 - Creates missing directories
-
-## Contribution Guidelines
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request

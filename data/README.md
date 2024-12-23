@@ -1,10 +1,34 @@
-# NOTE : all of my filtered files already uploaded in my drive, because my device is potato laptop
+**NOTE : all of my filtered files already uploaded in my drive, because my device is potato laptop**
 
-the files that i uses already filtered and use 50 files from 72 files.
+# EMG Data Processing Pipeline
 
-if you download the original files, the original folder structure will be like
+## Project Overview
+
+Automated processing system for EMG (Electromyography) datasets with class-based validation
+
+## Objective
+
+Develop a robust data processing pipeline for EMG gesture recognition datasets
+
+## Key Components
+
+- Recursive File Collection
+- Data Validation
+- Class-based Filtering
+- Structured Output Management
+
+## Features
+
+- Automated directory traversal
+- Systematic data validation
+- 7-class filtering mechanism
+- Organized pickle storage
+- Documentation and logging
+
+## Directory Structure
+
 ```
-/EMG_data_for_gestures-master/
+EMG_data_for_gestures-master/
 |
 ├── 01/
 │   └── 1_raw_data_13-12_22.03.16.txt
@@ -19,43 +43,56 @@ if you download the original files, the original folder structure will be like
 ├── 36/
 │   └── 1_raw_data_13-03_15.04.16.txt
 │   └── 2_raw_data_13-04_15.04.16.txt
+├── processed/
+|   └── valid_emg_paths.pkl
+└── README.txt
 ```
-the firs step is to moves alt .txt files in one folder and filter the files with 7 classes and 8 classes with simple python code
 
+## Usage
+
+1. Run the processor:
 ```
+python emg_processor.py
+```
+2. Enter the root directory path when prompted
+3. The script will:
+
+- Process all .txt files recursively
+- Validate files for 7 unique classes
+- Create a 'processed' directory
+- Save valid file paths to pickle format
+
+4. Load processed paths in your projects:
+```
+import pickle
 import os
-import pandas as pd
 
-# Input folder path
-folder = input("Enter the folder path: ")
+processed_dir = os.path.join("your_input_path", "processed")
+pickle_path = os.path.join(processed_dir, "valid_emg_paths.pkl")
 
-# List all files in the folder
-files = os.listdir(folder)
-datasets = [f for f in files if os.path.isfile(os.path.join(folder, f))]
-
-# Define the function
-def finder(files):
-    for file_name in files:
-        try:
-            # Construct the file path
-            file_path = os.path.join(folder, file_name)
-            
-            # Read the table
-            txt_f = pd.read_table(file_path)
-            
-            # Check if the DataFrame has a 'class' column and evaluate its unique class count
-            if 'class' in txt_f.columns:
-                unique_classes = len(txt_f['class'].unique())
-                if unique_classes == 8:
-                    print(f"{file_name} has 8 unique classes.")
-                else:
-                    print(f"{file_name} has {unique_classes} unique classes.")
-            else:
-                print(f"Column 'class' not found in {file_name}.")
-        except Exception as e:
-            print(f"Error processing file {file_name}: {e}")
-
-# Call the function
-finder(datasets)
-
+with open(pickle_path, 'rb') as f:
+    valid_paths = pickle.load(f)
 ```
+
+## Validation Criteria
+- Files must be in .txt format
+- Must contain 'class' column
+- Must have exactly 7 unique classes
+- Must be readable by pandas
+
+## Output Structure
+- Creates 'processed' subdirectory
+- Saves pickle file with valid paths
+- Maintains absolute path references
+- Provides processing statistics
+
+## Error Handling
+- Validates input directory
+- Handles file reading errors
+- Reports invalid class counts
+- Creates missing directories
+
+## Contribution Guidelines
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
